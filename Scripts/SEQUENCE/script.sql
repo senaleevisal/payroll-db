@@ -48,3 +48,7 @@ ALTER PROCEDURE add_benefit COMPILE;
 ALTER PROCEDURE apply_leave_with_limit COMPILE;
 ALTER PROCEDURE generate_payroll_for_all_employees COMPILE;
 ALTER PROCEDURE remove_employee COMPILE;
+ALTER PROCEDURE get_employee_payroll COMPILE;
+
+
+CREATE SEQUENCE Salaries_seq START WITH 1 INCREMENT BY 1;

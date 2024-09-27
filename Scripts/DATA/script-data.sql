@@ -118,8 +118,10 @@ VALUES (20, 'Nethru Randew', 'Customer Support Representative', 'Active', TO_DAT
     ADD_EMPLOYEE('Nethru Randew', 'Customer Support Representative', 'Active', TO_DATE('2022-08-18', 'YYYY-MM-DD'), 4, 5);
 END;
 /
-
-
+BEGIN
+    ADD_EMPLOYEE('Sawindu Randew', 'Customer Support Representative', 'Active', TO_DATE('2022-08-18', 'YYYY-MM-DD'), 4, 5);
+End;
+/
 remove_employee(20);
 
 BEGIN
@@ -136,5 +138,109 @@ END;
 /
 
 select * FROM BENEFITS;
+
+SELECT * FROM SALARIES;
+
+SELECT * FROM EMPLOYEES;
+
+BEGIN
+    assign_salary(24, 70000, 550, 121, TO_DATE('2024-06-15', 'YYYY-MM-DD'));
+END;
+/
+
+
+DECLARE
+    v_net_salary NUMBER;
+BEGIN
+    v_net_salary := generate_salary(4);
+    DBMS_OUTPUT.PUT_LINE('The net salary is: ' || v_net_salary);
+END;
+/
+
+BEGIN
+    generate_payroll_for_all_employees;
+END;
+/
+
+
+
+DECLARE
+    v_result VARCHAR2(4000);
+BEGIN
+    v_result := get_employee_payroll(4);
+    DBMS_OUTPUT.PUT_LINE(v_result);
+END;
+/
+
+
+
+DELETE FROM Payroll;
+
+-- Execute the assign_salary procedure for 20 employees
+BEGIN
+    assign_salary(4, 345000, 300, 100, TO_DATE('2024-01-15', 'YYYY-MM-DD'));
+    assign_salary(5, 35500, 350, 101, TO_DATE('2024-01-15', 'YYYY-MM-DD'));
+    assign_salary(6, 56000, 400, 102, TO_DATE('2024-02-01', 'YYYY-MM-DD'));
+    assign_salary(7, 67200, 450, 103, TO_DATE('2024-02-01', 'YYYY-MM-DD'));
+    assign_salary(8, 65800, 320, 104, TO_DATE('2024-02-15', 'YYYY-MM-DD'));
+    assign_salary(9, 36100, 370, 105, TO_DATE('2024-02-15', 'YYYY-MM-DD'));
+    assign_salary(10, 66400, 410, 106, TO_DATE('2024-03-01', 'YYYY-MM-DD'));
+    assign_salary(11, 55700, 360, 108, TO_DATE('2024-03-01', 'YYYY-MM-DD'));
+    assign_salary(12, 76600, 420, 109, TO_DATE('2024-03-15', 'YYYY-MM-DD'));
+    assign_salary(13, 65300, 280, 110, TO_DATE('2024-03-15', 'YYYY-MM-DD'));
+    assign_salary(14, 47000, 500, 111, TO_DATE('2024-04-01', 'YYYY-MM-DD'));
+    assign_salary(15, 45800, 330, 112, TO_DATE('2024-04-01', 'YYYY-MM-DD'));
+    assign_salary(16, 75900, 360, 113, TO_DATE('2024-04-15', 'YYYY-MM-DD'));
+    assign_salary(17, 66100, 400, 114, TO_DATE('2024-04-15', 'YYYY-MM-DD'));
+    assign_salary(18, 36500, 480, 115, TO_DATE('2024-05-01', 'YYYY-MM-DD'));
+    assign_salary(19, 46200, 440, 116, TO_DATE('2024-05-01', 'YYYY-MM-DD'));
+    assign_salary(20, 66800, 510, 117, TO_DATE('2024-05-15', 'YYYY-MM-DD'));
+    assign_salary(21, 68600, 470, 118, TO_DATE('2024-05-15', 'YYYY-MM-DD'));
+    assign_salary(22, 77200, 520, 119, TO_DATE('2024-06-01', 'YYYY-MM-DD'));
+    assign_salary(23, 56100, 390, 120, TO_DATE('2024-06-01', 'YYYY-MM-DD'));
+END;
+
+-- pavith
+INSERT INTO Salaries (salary_id, emp_id, basic_salary, bonus, deductions, effective_date)
+VALUES (Salaries_seq.NEXTVAL, 5, 70000, 550, 121, TO_DATE('2024-06-15', 'YYYY-MM-DD'));
+
+
+--pl procedure
+UPDATE Salaries
+SET basic_salary = 60000, bonus = 5000, deductions = 2000
+WHERE emp_id = 5;
+
+----------------------------------------------------------
+
+
+
+BEGIN
+    assign_salary(14, 47000, 500, 111, TO_DATE('2024-04-01', 'YYYY-MM-DD'));
+    END;
+    /
+
+SELECT * FROM EMPLOYEES;
+
+select * FROM BENEFITS;
+
+SELECT * FROM EMPLOYEES WHERE emp_id = 23;
+
+BEGIN
+    ADD_BENEFIT(1,'christmas',2000);
+    ADD_BENEFIT(2,'Fuel Pass',20000);
+    ADD_BENEFIT(3,'Health Insurance',25000);
+    ADD_BENEFIT(4,'Retirement Plans',10000);
+
+END;
+/
+BEGIN
+    assign_salary();
+    END;
+
+BEGIN
+    remove_employee(24);
+    END;
+    /
+
 
 SELECT * FROM SALARIES;

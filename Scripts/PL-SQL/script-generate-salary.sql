@@ -6,20 +6,26 @@ RETURN NUMBER IS
     v_net_salary NUMBER;
 BEGIN
     -- Retrieve basic salary, bonus, and deductions for the employee
-    SELECT basic_salary, bonus, deductions 
-    INTO v_basic_salary, v_bonus, v_deductions 
+    -- Assumes that there is only one salary record per employee. 
+    -- If there can be multiple, you might want to add a condition (like the most recent effective date).
+    SELECT basic_salary, NVL(bonus, 0), NVL(deductions, 0)
+    INTO v_basic_salary, v_bonus, v_deductions
     FROM Salaries
     WHERE emp_id = p_emp_id;
     
     -- Calculate net salary
-    v_net_salary := v_basic_salary + NVL(v_bonus, 0) - NVL(v_deductions, 0);
+    v_net_salary := v_basic_salary + v_bonus - v_deductions;
     
     -- Return the calculated net salary
     RETURN v_net_salary;
+
 EXCEPTION
+    -- Catch no data found error, if there's no salary for the employee
     WHEN NO_DATA_FOUND THEN
         DBMS_OUTPUT.PUT_LINE('Employee salary not found for emp_id: ' || p_emp_id);
         RETURN 0;
+
+    -- Catch any other errors
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Error generating salary: ' || SQLERRM);
         RETURN 0;
